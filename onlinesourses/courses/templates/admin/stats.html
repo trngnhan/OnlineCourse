@@ -23,7 +23,7 @@
 
         {% for s in stats %}
             data.push({{ s.course_count }})
-            label.push({{ s.name }})
+            label.push('{{ s.name }}')
         {% endfor %}
 
         window.onload = function() {
@@ -36,6 +36,8 @@
               datasets: [{
                 label: '#Số lượng',
                 data: data,
+                backgroundColor: 'rgba(255,220,0,0.6)',
+                borderColor: 'rgb(255,255,255)',
                 borderWidth: 1
               }]
             },
