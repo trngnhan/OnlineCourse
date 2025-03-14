@@ -3,9 +3,10 @@ from tkinter.constants import PROJECTING
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
+from cloudinary.models import CloudinaryField
 
 class User(AbstractUser):
-    pass
+    avatar = CloudinaryField(null=True)
 
 class BaseModel(models.Model):
     active = models.BooleanField(default=True)
@@ -24,7 +25,7 @@ class Category(BaseModel):
 class Course(BaseModel):
     subject = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='courses/%Y/%m/')
+    image = CloudinaryField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -36,8 +37,9 @@ class Course(BaseModel):
 class Lesson(BaseModel):
     subject = models.CharField(max_length=255)
     content = RichTextField()
-    image = models.ImageField(upload_to='courses/%Y/%m/')
+    image = CloudinaryField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    tags = models.ManyToManyField('Tag')
 
     class Meta:
         unique_together = ('subject', 'course')
