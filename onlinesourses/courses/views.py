@@ -4,8 +4,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from courses import serializers, paginators
-from rest_framework import viewsets, generics, status
-from courses.models import Course, Category, Tag, Lesson
+from rest_framework import viewsets, generics, status, parsers
+from courses.models import Course, Category, Tag, Lesson, User
 
 class CategoryViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Category.objects.filter(active=True)
@@ -38,6 +38,12 @@ class LessonViewSet(viewsets.ViewSet, generics.RetrieveAPIView):
     queryset = Lesson.objects.prefetch_related('tags').filter(active=True)
     serializer_class = serializers.LessonDetailsSerializer
 
-#Test
-class CommentViewSet(viewsets.ViewSet, generics.ListAPIView):
-    pass
+    @action(methods=['get'], detail=True, url_path='comments')
+    def get_comment(self, request, pk):
+        comments = self.get_object().comment_set.select_related('user').filter(active=True)
+        return Response(serializers.CommentSerializer(comments, many=True).data, status=status.HTTP_200_OK)
+
+class UserViewSet(viewsets.ViewSet, generics.CreateAPIView):
+    queryset = User.objects.filter(is_active=True)
+    serializer_class = serializers.UserSerializer
+    parser_classes = [parsers.MultiPartParser]
