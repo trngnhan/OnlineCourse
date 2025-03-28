@@ -44,7 +44,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.staticfiles',
     'drf_yasg',
+    'oauth2_provider',
 ]
+
+#Chung thuc user
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
+
+#Them vao React Front-end
+OAUTH2_PROVIDER = { 'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore' }
 
 import cloudinary
 import cloudinary.uploader
@@ -99,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coursedb',
         'USER': 'root',
-        'PASSWORD': 'Admin@123',
+        'PASSWORD': 'root',
         'HOST': '' # mặc định localhost
     }
 }
@@ -149,3 +160,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CLIENT_ID = "HfjsBjkrj22LP8BXgubASJRtrbvirSpRL4cklqBx"
+# CLIENT_SECRET = "vsIKNP15QU4DmaL1GjcqIXf0BEMGcPTtRSk89wzr18U4dNMHnJYN5Qt7MxRiVMY51r4VqA2Eo4ENVtZ0YpHeenWtDD2XhIcmlgy3sgLTX9Nguf1FW43dBKrF9a2Il9Oq"
