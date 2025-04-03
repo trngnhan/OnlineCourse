@@ -110,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'coursedb',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'Admin@123',
         'HOST': '' # mặc định localhost
     }
 }
@@ -161,5 +161,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Trên máy trường
 # CLIENT_ID = "HfjsBjkrj22LP8BXgubASJRtrbvirSpRL4cklqBx"
 # CLIENT_SECRET = "vsIKNP15QU4DmaL1GjcqIXf0BEMGcPTtRSk89wzr18U4dNMHnJYN5Qt7MxRiVMY51r4VqA2Eo4ENVtZ0YpHeenWtDD2XhIcmlgy3sgLTX9Nguf1FW43dBKrF9a2Il9Oq"
+
+#Ở nhà
+# CLIENT_ID = "pLOT07X8YKfpW0VDDmdI647dwqbMmNPtXOrl8NVk"
+# CLIENT_SECRET = "IvIXN6M1bVwDBw3JZBPw8Zyjd58hDXk4tovWX2B9HvLtWSTMyb7C0L1rXYIGjxAh3DHY5pxMGRI9Zjm8MOG3tD0ljHDBCaE2Zj79hlM56SP2bqGqlgTvhlyi1Wedqxfp"
