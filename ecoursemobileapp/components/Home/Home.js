@@ -4,6 +4,7 @@ import { FlatList, Image, Text,TouchableOpacity,View } from "react-native";
 import { ActivityIndicator, Chip, List, Searchbar } from "react-native-paper";
 import Apis, { endpoints } from "../../configs/Apis";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
     const [categories, setCategories]=useState([]);
@@ -12,7 +13,7 @@ const Home = () => {
     const [page, setPage]=useState(1);
     const [q, setQ]=useState([]);
     const [cateId, setCateId] = useState(null);
-
+    const nav = useNavigation();
 
 
     const loadCates=async () => {
@@ -98,7 +99,7 @@ const Home = () => {
             
 
             <FlatList onEndReached={loadMore} ListFooterComponent={loading && <ActivityIndicator/>} data={courses} renderItem={({item})=><List.Item title={item.subject} 
-                description={item.created_date} left ={()=> <Image style ={MyStyles.avatar} source={{uri:item.image}}/>}/>}/>
+                description={item.created_date} left ={()=> <TouchableOpacity onPress={() => nav.navigate('lesson', {"courseId": item.id})}><Image style ={MyStyles.avatar} source={{uri: item.image}}/></TouchableOpacity>}/>}/>
         </SafeAreaView>
     );
 }
